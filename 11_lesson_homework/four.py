@@ -5,6 +5,8 @@ class Sphere:
     """Класс сферы"""
 
     def __init__(self, radius=1, x=1, y=1, z=1):
+        if radius < 0:
+            print("Неверный радиус")
         self.__radius = radius
         self.__x = x
         self.__y = y
@@ -17,7 +19,10 @@ class Sphere:
         return 4 * math.pi * self.__radius**2
 
     def set_radius(self, new_radius):
-        self.__radius = new_radius
+        if new_radius < 0:
+            print("Неверный радиус")
+        else:
+            self.__radius = new_radius
 
     def get_radius(self):
         return self.__radius

@@ -1,6 +1,4 @@
 class SuperStr(str):
-    """Нечего не придумал, но что-то написать нужно"""
-
     def is_repeatance(self, s):
         if not s or not self:
             return False
