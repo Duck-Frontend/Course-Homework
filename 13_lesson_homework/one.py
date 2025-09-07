@@ -1,11 +1,9 @@
 def one(finish):
-    numbers = []
+    a, b = 0, 1
 
-    for i in range(finish):
-        if len(numbers) < 2:
-            numbers.append(i)
-        else:
-            numbers.append(numbers[i - 2] + numbers[i - 1])
+    for _ in range(finish):
+        yield a
+        a, b = b, a + b
 
 
 one(10)
