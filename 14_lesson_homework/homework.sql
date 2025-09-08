@@ -4,10 +4,10 @@ CREATE DATABASE homework_db;
 
 CREATE TABLE Employees(
     id SERIAL PRIMARY KEY,
-    name varchar(128) not null,
-    position varchar(128) not null,
-    department varchar(128) not null,
-    salary decimal(8,2)
+    name VARCHAR(128) not null,
+    position VARCHAR(128) not null,
+    department VARCHAR(128) not null,
+    salary DECIMAL(8,2)
 );
 
 INSERT INTO Employees (name, position, department, salary) VALUES

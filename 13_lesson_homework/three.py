@@ -19,27 +19,27 @@ class PizzaBuilder:
     def __init__(self):
         self.pizza = Pizza()
 
-    def set_size(self, size):
+    def with_size(self, size):
         self.pizza.size = size
         return self
 
-    def set_cheese(self, cheese):
+    def with_cheese(self, cheese):
         self.pizza.cheese = cheese
         return self
 
-    def set_pepperoni(self, pepperoni):
+    def with_pepperoni(self, pepperoni):
         self.pizza.pepperoni = pepperoni
         return self
 
-    def set_mushrooms(self, mushrooms):
+    def with_mushrooms(self, mushrooms):
         self.pizza.mushrooms = mushrooms
         return self
 
-    def set_onions(self, onions):
+    def with_onions(self, onions):
         self.pizza.onions = onions
         return self
 
-    def set_bacon(self, bacon):
+    def with_bacon(self, bacon):
         self.pizza.bacon = bacon
         return self
 
@@ -57,7 +57,7 @@ class PizzaDirector:
                    mushrooms=False, onions=False, bacon=False):
         self.builder.set_size(size)
         if cheese:
-            self.builder.add_cheese()
+            self.builder.with_cheese()
         if pepperoni:
-            self.builder.add_pepperoni()
+            self.builder.with_pepperoni()
         return self.builder.build()
