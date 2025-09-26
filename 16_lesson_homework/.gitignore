@@ -1,2 +1,4 @@
 __pycache__/
-alembic/
+.env
+.venv
+
