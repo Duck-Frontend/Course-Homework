@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import DECIMAL, Column, ForeignKey, String, INTEGER, DATETIME
+from sqlalchemy import DECIMAL, Column, ForeignKey, String, INTEGER, TIMESTAMP
 from sqlalchemy import Enum
 
 Base = declarative_base()
@@ -18,7 +18,7 @@ class Events(Base):
     id = Column(INTEGER, primary_key=True)
     place = Column(INTEGER, ForeignKey(Places.id))
     event_name = Column(String)
-    event_time = Column(DATETIME)
+    event_time = Column(TIMESTAMP)
     event_duration = Column(INTEGER, nullable=False)
     price = Column(DECIMAL(10, 2), nullable=False)
 
@@ -33,4 +33,4 @@ class Tickers(Base):
         nullable=False,
         default='available'
     )
-    created_at = Column(DATETIME)
+    created_at = Column(TIMESTAMP)
