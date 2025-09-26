@@ -2,10 +2,13 @@ import os
 import tabulate
 
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 
+
 from simple_term_menu import TerminalMenu
+
+from models import Places, Events, Tickers
 
 
 class CLI:
@@ -36,20 +39,34 @@ class CLI:
             case 4: self.__reserve_ticket()
             case 5: self.__cancel_ticket()
             case 6: exit()
-
+        return self
     # CRUD
+
     def __show_all_events(self):
+        events = select(
+            Places.place_name.label('place_name'),  # название места
+            Events.event_name.label('event_name'),  # название мероприятия
+            Events.event_time,                      # время начала
+            Events.event_duration,                  # длительность
+            Events.price                      # цена билета
+        ).join(
+            Places, Events.place == Places.id  # JOIN по внешнему ключу
+        )
 
-        result = self.session.execute(text("SELECT * FROM events"))
-        results = tabulate.tabulate(result.all())
+        data = [['Название места', 'Название мероприятия',
+                 'Время начала', 'Длительность', 'Цена билета']]
 
-        print(results)
+        with self.engine.connect() as conn:
+            for row in conn.execute(events):
+                data.append(list(row))
+
+        print(tabulate.tabulate(data))
         return self
 
     def __add_place(self):
         event_name = input("Введите название мероприятия: ")
-        event_price
-        event_time
+        event_price = float(input())
+        event_time = input()
 
     def __add_event(self):
         pass
