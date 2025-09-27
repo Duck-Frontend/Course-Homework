@@ -24,7 +24,7 @@ class Controller:
             Events.event_duration,
             Events.price
         ).join(
-            Places, Events.place == Places.id  # JOIN по внешнему ключу
+            Places, Events.place == Places.id
         )
 
         data = [['Название места', 'Название мероприятия',
@@ -45,7 +45,7 @@ class Controller:
             Events.event_duration,
             Events.price
         ).join(
-            Places, Events.place == Places.id  # JOIN по внешнему ключу
+            Places, Events.place == Places.id
         ).where(Events.event_name == name)
 
         data = [['Название места', 'Название мероприятия',
@@ -66,7 +66,7 @@ class Controller:
             Events.event_duration,
             Events.price
         ).join(
-            Places, Events.place == Places.id  # JOIN по внешнему ключу
+            Places, Events.place == Places.id
         ).where(Places.place_name == name)
 
         data = [['Название места', 'Название мероприятия',
@@ -103,7 +103,7 @@ class Controller:
                 pass
 
     def create_event(self):
-        # Сбрасываем последовательность ID
+        # Не знаю почему не работает autoincrement но без этого костыля выкидывает ошибку существующего id
         self.session.execute(
             text("SELECT setval('events_id_seq', (SELECT MAX(id) FROM events))"))
         self.session.commit()

@@ -1,7 +1,4 @@
-import tabulate
-
 from core.view.view import View
-from models import Places, Events, Tickers
 
 
 class CLI:

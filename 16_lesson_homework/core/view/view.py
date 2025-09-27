@@ -45,10 +45,6 @@ class View:
     def show_all_events(self, data):
         print(tabulate.tabulate(data))
 
-        # event_name = input("Введите название мероприятия: ")
-        # event_price = float(input())
-        # event_time = input()
-
     def __add_event(self):
         self.controller.create_event()
 
