@@ -1,4 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
+
 from sqlalchemy import DECIMAL, Column, ForeignKey, String, INTEGER, TIMESTAMP
 from sqlalchemy import Enum
 
@@ -7,7 +8,7 @@ Base = declarative_base()
 
 class Places(Base):
     __tablename__ = "places"
-    id = Column(INTEGER, primary_key=True)
+    id = Column(INTEGER, primary_key=True, autoincrement=True)
     place_name = Column(String(128), nullable=False)
     max_visitors = Column(INTEGER)
 
@@ -15,7 +16,7 @@ class Places(Base):
 class Events(Base):
     __tablename__ = "events"
 
-    id = Column(INTEGER, primary_key=True)
+    id = Column(INTEGER, primary_key=True, autoincrement=True)
     place = Column(INTEGER, ForeignKey(Places.id))
     event_name = Column(String)
     event_time = Column(TIMESTAMP)
@@ -25,7 +26,7 @@ class Events(Base):
 
 class Tickers(Base):
     __tablename__ = "tickets"
-    id = Column(INTEGER, primary_key=True)
+    id = Column(INTEGER, primary_key=True, autoincrement=True)
     event = Column(INTEGER, ForeignKey(Events.id, ondelete='CASCADE'))
     ticket_status = Column(
         Enum('available', 'booked', 'sold', 'cancelled',
