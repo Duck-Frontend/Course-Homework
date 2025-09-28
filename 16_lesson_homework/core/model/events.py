@@ -1,7 +1,7 @@
 from sqlalchemy.ext.declarative import declarative_base
 
 from sqlalchemy import DECIMAL, Column, ForeignKey, String, INTEGER, TIMESTAMP
-from model.places import Places
+from core.model.places import Places
 
 Base = declarative_base()
 

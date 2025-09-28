@@ -3,12 +3,12 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, ForeignKey, INTEGER, TIMESTAMP
 from sqlalchemy import Enum
 
-from model.events import Events
+from core.model.events import Events
 
 Base = declarative_base()
 
 
-class Tickers(Base):
+class Tickets(Base):
     __tablename__ = "tickets"
     id = Column(INTEGER, primary_key=True, autoincrement=True)
     event = Column(INTEGER, ForeignKey(Events.id, ondelete='CASCADE'))
