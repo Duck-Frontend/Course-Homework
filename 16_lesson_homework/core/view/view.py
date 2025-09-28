@@ -1,15 +1,14 @@
-import os
 import tabulate
 
-
 from core.controller.controller import Controller
-
+from core.controller.events import Events_Controller
 from simple_term_menu import TerminalMenu
 
 
 class View:
     def __init__(self):
         self.controller = Controller()
+        self.controller_events = Events_Controller()
         self.__menu_items = [
             "Просмотр мероприятий",
             "Добавить мероприятие",
@@ -25,7 +24,8 @@ class View:
 
         match user_chose:
             case 0:
-                self.show_all_events(self.controller.select_all_events())
+                self.show_all_events(
+                    self.controller_events.select_all_events())
             case 1:
                 self.__add_event()
             case 2:
