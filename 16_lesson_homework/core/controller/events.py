@@ -72,7 +72,6 @@ class Events_Controller(Controller):
         return data
 
     def create_event(self):
-        # Не знаю почему не работает autoincrement но без этого костыля выкидывает ошибку существующего id
         self.session.execute(
             text("SELECT setval('events_id_seq', (SELECT MAX(id) FROM events))"))
         self.session.commit()
