@@ -71,14 +71,6 @@ class Events_Controller(Controller):
 
         return data
 
-    def select_event_id(self):
-        name = input("Введите название мероприятия: ")
-        events = select(Events.id).where(Events.event_name == name)
-
-        with self.engine.connect() as conn:
-            for row in conn.execute(events):
-                return row[0]
-
     def create_event(self):
         # Не знаю почему не работает autoincrement но без этого костыля выкидывает ошибку существующего id
         self.session.execute(
