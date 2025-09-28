@@ -32,14 +32,3 @@ class Events_View(View):
 
     def __searh_events_partial(self):
         pass
-
-    def __reserve_ticket(self):
-        id = self.controller.select_event_id()
-        self.controller.update_ticket_by_name(id, "book")
-
-    def __cancel_ticket(self):
-        id = self.controller.select_event_id()
-        self.controller.update_ticket_by_name(id, "cancel")
-
-    def __show_tickets(self):
-        pass
