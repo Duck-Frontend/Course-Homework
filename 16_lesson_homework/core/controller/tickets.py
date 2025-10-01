@@ -3,6 +3,10 @@ from core.model.tickets import Tickets
 
 
 class Tickets_Controller(Controller):
+
+    def show_tickets_by_event(self, event_id):
+        pass
+
     def update_ticket_by_name(self, id, method):
         if method == "cancel":
             try:
