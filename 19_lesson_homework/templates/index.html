@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block main %} 
+
+    {% if not task%}
+        <h2>Постов нет</h2>
+    {% endif %}
+    {% for i in task %}
+        <div class="post-preview">
+            <a href="/blog/post/{{ i.id }}"> {{ i.title }} </a>
+        </div>
+    {% endfor %}
+        <a href="add_task" class="btn-add-task">+ New task</a>
+{% endblock %}

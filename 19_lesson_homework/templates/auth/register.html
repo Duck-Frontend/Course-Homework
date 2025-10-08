@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block main %}
+<form action="/register" method="POST">
+    <input class="input"  type="text" name="name" placeholder="name" required>
+    <input class="input" type="email" name="email" placeholder="email">
+    <input class="input" type="password" name="password" placeholder="password">
+    <input class="input" type="password" name="password_repeat" placeholder="password repeat">
+    <button class="input input_btn" type="submit">Register</button>
+</form>
+{% endblock %}
