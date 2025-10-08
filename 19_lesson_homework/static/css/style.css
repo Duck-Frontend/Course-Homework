@@ -63,6 +63,26 @@ body {
     position: relative;
 }
 
+.task_list {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.task_item {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.task_link {
+    text-decoration: none;
+    color: var(--grey);
+    text-align: left;
+}
+
 
 
 .btn-add-task {

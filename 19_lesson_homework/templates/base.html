@@ -1,39 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-
-
-
-    <link rel="stylesheet" href="../static/css/style.css">  
-
-    <title>{% block title %} {% endblock %}</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>{% block title %}{% endblock %}</title>
 </head>
-
 <body>
-    <div class="container"> 
+    <div class="container">
         <header class="header">
             <nav class="nav">
-                <a href="" class="material-symbols-outlined">menu</a>
+                <a href="#" class="material-icons">menu</a>
             </nav>
-            <h4 class="header_title">ToDo List</h4>
-            <nav class="account_nav">
-                <a href="/login" class="material-symbols-outlined">login</a>
-                <a href="/register" class="material-symbols-outlined">register</a>
+            <h4 class="header-title">Todo List</h4>
+            <nav class="account-nav">
+                {% if session.logged_in %}
+                    <span>Hello, {{ session.user_name }}</span>
+                    <a href="/logout" class="material-icons">logout</a>
+                {% else %}
+                    <a href="/login" class="material-icons">login</a>
+                    <a href="/register" class="material-icons">person_add</a>
+                {% endif %}
             </nav>
-            <!-- <span class="material-symbols-outlined">close</span>  -->
         </header>
         <main class="main">
-            {% block main%} {% endblock %}
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            {% block main %}{% endblock %}
         </main>
         <footer class="footer"></footer>
     </div>
 </body>
-
 </html>

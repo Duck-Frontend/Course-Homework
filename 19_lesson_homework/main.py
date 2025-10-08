@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+import os
+from flask import Flask
 
 from view.task import task_bp
 from view.auth import auth_bp
@@ -6,9 +7,7 @@ from view.auth import auth_bp
 app = Flask(__name__)
 
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+app.secret_key = os.urandom(24)
 
 
 app.register_blueprint(task_bp)

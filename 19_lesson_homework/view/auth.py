@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, flash, render_template, request, redirect, session
 from controller.user import UserController as controller
 
 auth_bp = Blueprint('auth', __name__, template_folder='templates/auth/')
@@ -10,26 +10,64 @@ def register():
         return render_template("auth/register.html")
 
     elif request.method == "POST":
-        name = request.form["name"]
-        email = request.form["email"]
-        password = request.form["password"]
-        password_repeat = request.form["password_repeat"]
+        try:
+            name = request.form["name"]
+            email = request.form["email"]
+            password = request.form["password"]
+            password_repeat = request.form["password_repeat"]
 
-        result = controller.register(name, email, password, password_repeat)
-        if result == "OK":
+            user_data = controller.register(
+                name, email, password, password_repeat)
+
+            session['user_id'] = user_data['id']
+            session['user_name'] = user_data['name']
+            session['user_email'] = user_data['email']
+            session['logged_in'] = True
+
+            flash(f"Registration succesful! Welcome, {
+                  user_data['name']}", "success")
+
             return redirect("/")
-        else:
-            return "Fuck You"
+
+        except ValueError as e:
+            flash(str(e), "error")
+            return render_template("auth/register.html")
+        except Exception as e:
+            flash("An error occurred during registration", "error")
+            return render_template("auth/register.html")
 
 
-@auth_bp.route("/login", methods=["GET", "POST"])
+@auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "GET":
         return render_template("auth/login.html")
+
     elif request.method == "POST":
-        login = request.form["login"]
-        password = request.form["password"]
+        try:
+            email = request.form["email"]
+            password = request.form["password"]
 
-        print(login, password)
+            user_data = controller.login(email, password)
 
-        return redirect("/")
+            # Сохраняем пользователя в сессии
+            session['user_id'] = user_data['id']
+            session['user_name'] = user_data['name']
+            session['user_email'] = user_data['email']
+            session['logged_in'] = True
+
+            flash(f"Welcome back, {user_data['name']}!", "success")
+            return redirect("/")
+
+        except ValueError as e:
+            flash(str(e), "error")
+            return render_template("auth/login.html")
+        except Exception as e:
+            flash("An error occurred during login", "error")
+            return render_template("auth/login.html")
+
+
+@auth_bp.route('/logout')
+def logout():
+    controller.logout()
+    flash("You have been logged out successfully", "success")
+    return redirect("/")

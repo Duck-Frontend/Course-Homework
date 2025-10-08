@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 
-{% block main %} 
+{% block title %}Todo List{% endblock %}
 
-    {% if not task%}
-        <h2>Постов нет</h2>
+{% block main %}
+    {% if not tasks %}
+        <h2>No tasks</h2>
     {% endif %}
-    {% for i in task %}
-        <div class="post-preview">
-            <a href="/blog/post/{{ i.id }}"> {{ i.title }} </a>
-        </div>
-    {% endfor %}
-        <a href="add_task" class="btn-add-task">+ New task</a>
+    
+    <ul class="task_list">
+        {% for task in tasks %}
+            <li class="task_item">
+                <a href="/task/done/{{task.id}}">done</a>
+                <a href="/task/{{task.id}}" class="task_link">{{task.name}}</a>
+                <a href="/task/delete/{{task.id}}">del</a>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <a href="/add_task" class="btn-add-task">+ New task</a>
 {% endblock %}
