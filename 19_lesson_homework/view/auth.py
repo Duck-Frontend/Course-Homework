@@ -8,6 +8,7 @@ auth_bp = Blueprint('auth', __name__, template_folder='templates/auth/')
 def register():
     if request.method == "GET":
         return render_template("auth/register.html")
+
     elif request.method == "POST":
         name = request.form["name"]
         email = request.form["email"]
